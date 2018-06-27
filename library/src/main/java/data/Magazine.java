@@ -41,7 +41,7 @@ public class Magazine extends Publication {
     @Override
     public String toString() {
         return "Title: " + getTitle()
-                + "\n, Publisher: " + getPublisher()
+                + "\nPublisher: " + getPublisher()
                 + "\nLanguage: " + getLanguage()
                 + "\nYear: " + getYear()
                 + "\nMonth:" + getMonth()

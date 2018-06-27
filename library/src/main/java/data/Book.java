@@ -41,7 +41,7 @@ public class Book extends Publication {
     @Override
     public String toString() {
         return "Title: " + getTitle()
-                + "\n, Author: " + getAuthor()
+                + "\nAuthor: " + getAuthor()
                 + "\nYear: " + getYear()
                 + "\nPages: " + getPages()
                 + "\nPublisher:" + getPublisher()
