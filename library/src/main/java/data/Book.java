@@ -40,12 +40,20 @@ public class Book extends Publication {
 
     @Override
     public String toString() {
-        return "Title: " + getTitle()
-                + "\nAuthor: " + getAuthor()
-                + "\nYear: " + getYear()
-                + "\nPages: " + getPages()
-                + "\nPublisher:" + getPublisher()
-                + "\nISBN: " + getIsbn();
+        StringBuilder print = new StringBuilder();
+        print.append("Title: ")
+                .append(getTitle())
+                .append("\nAuthor: ")
+                .append(getAuthor())
+                .append("\nYear: ")
+                .append(getYear())
+                .append("\nPages: ")
+                .append(getPages())
+                .append("\nPublisher: ")
+                .append(getPublisher())
+                .append("\nISBN: ")
+                .append(getIsbn());
+        return print.toString();
     }
 
     @Override
