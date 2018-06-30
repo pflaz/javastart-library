@@ -1,8 +1,9 @@
 package data;
 
-import java.util.Arrays;
+import java.io.Serializable;
 
-public class Library {
+public class Library implements Serializable {
+    public static final long serialVersionUID = 53847563775834L;
     public final int MAX_PUBLICATIONS = 2000;
     private Publication[] publications;
     private int publicationsNumber;

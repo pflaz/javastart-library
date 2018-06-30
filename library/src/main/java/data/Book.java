@@ -3,6 +3,7 @@ package data;
 import java.util.Objects;
 
 public class Book extends Publication {
+    public static final long serialVersionUID = 29348294893L;
     private String author;
     private int pages;
     private String isbn;
