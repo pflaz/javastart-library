@@ -1,15 +1,16 @@
 package data;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Library implements Serializable {
     public static final long serialVersionUID = 53847563775834L;
-    public final int MAX_PUBLICATIONS = 2000;
+    public static final int INITIAL_CAPACITY = 1;
     private Publication[] publications;
     private int publicationsNumber;
 
     public Library() {
-        publications = new Publication[MAX_PUBLICATIONS];
+        publications = new Publication[INITIAL_CAPACITY];
     }
 
     public Publication[] getPublications() {
@@ -20,12 +21,34 @@ public class Library implements Serializable {
         return publicationsNumber;
     }
 
-    private void addPublication(Publication publication) throws ArrayIndexOutOfBoundsException {
-        if (publicationsNumber == MAX_PUBLICATIONS) {
-            throw new ArrayIndexOutOfBoundsException("MAX PUBLICATIONS " + MAX_PUBLICATIONS);
+    private void addPublication(Publication publication) {
+        if (publicationsNumber == publications.length) {
+            publications = Arrays.copyOf(publications, publications.length * 2);
         }
             publications[publicationsNumber] = publication;
             publicationsNumber++;
+    }
+
+    public void removePublication(Publication publication) {
+        if (publication == null) {
+            return;
+        }
+        final int NOT_FOUND = -1;
+        int found = NOT_FOUND;
+        int i = 0;
+        while (i < publications.length && found == NOT_FOUND) {
+            if (publication.equals(publications[i])) {
+                found = i;
+            } else {
+                i++;
+            }
+        }
+
+        if (found != NOT_FOUND) {
+            System.arraycopy(publications, found + 1, publications, found, publications.length - found - 1);
+            publications[publications.length - 1] = null;
+            publicationsNumber--;
+        }
     }
 
     public void addBook(Book book) {
