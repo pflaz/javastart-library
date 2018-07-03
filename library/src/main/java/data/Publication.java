@@ -3,7 +3,7 @@ package data;
 import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Publication implements Serializable {
+public abstract class Publication implements Serializable, Comparable<Publication> {
     public static final long serialVersionUID = 54354553543534554L;
     private int year;
     private String title;
@@ -55,4 +55,8 @@ public abstract class Publication implements Serializable {
         return Objects.hash(year, title, publisher);
     }
 
+    @Override
+    public int compareTo(Publication o) {
+        return title.compareTo(o.getTitle());
+    }
 }

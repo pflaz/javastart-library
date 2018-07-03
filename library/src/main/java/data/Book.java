@@ -73,4 +73,6 @@ public class Book extends Publication {
 
         return Objects.hash(super.hashCode(), author, pages, isbn);
     }
+
+
 }

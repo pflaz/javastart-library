@@ -2,6 +2,7 @@ package data;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Library implements Serializable {
     public static final long serialVersionUID = 53847563775834L;
@@ -67,5 +68,42 @@ public class Library implements Serializable {
                     .append("\n");
         }
         return builder.toString();
+    }
+
+    public static class AlphabeticalComparator implements Comparator<Publication> {
+        @Override
+        public int compare(Publication o1, Publication o2) {
+            if (o1 == null && o2 == null) {
+                return 0;
+            }
+            if (o1 == null) {
+                return 1;
+            }
+            if (o2 == null) {
+                return -1;
+            }
+            return o1.getTitle().compareTo(o2.getTitle());
+        }
+    }
+
+    public static class DateComparator implements Comparator<Publication> {
+        @Override
+        public int compare(Publication o1, Publication o2) {
+            if (o1 == null && o2 == null) {
+                return 0;
+            }
+
+            if (o1 == null) {
+                return 1;
+            }
+
+            if (o2 == null) {
+                return -1;
+            }
+
+            Integer i1 = o1.getYear();
+            Integer i2 = o2.getYear();
+            return -i1.compareTo(i2);
+        }
     }
 }
