@@ -1,54 +1,45 @@
 package data;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Library implements Serializable {
     public static final long serialVersionUID = 53847563775834L;
-    public static final int INITIAL_CAPACITY = 1;
-    private Publication[] publications;
-    private int publicationsNumber;
+    private Map<String, Publication> publications;
+    private Map<String, LibraryUser> users;
+
 
     public Library() {
-        publications = new Publication[INITIAL_CAPACITY];
+        publications = new HashMap<>();
+        users = new HashMap<>();
     }
 
-    public Publication[] getPublications() {
+
+    public int getPublicationsNumber() {
+        return publications.size();
+    }
+
+    public Map<String, Publication> getPublications() {
         return publications;
     }
 
-    public int getPublicationsNumber() {
-        return publicationsNumber;
+    public Map<String, LibraryUser> getUsers() {
+        return users;
     }
 
-    private void addPublication(Publication publication) {
-        if (publicationsNumber == publications.length) {
-            publications = Arrays.copyOf(publications, publications.length * 2);
-        }
-            publications[publicationsNumber] = publication;
-            publicationsNumber++;
+    public void addUser(LibraryUser user) {
+        users.put(user.getPesel(), user);
     }
 
-    public void removePublication(Publication publication) {
-        if (publication == null) {
-            return;
-        }
-        final int NOT_FOUND = -1;
-        int found = NOT_FOUND;
-        int i = 0;
-        while (i < publications.length && found == NOT_FOUND) {
-            if (publication.equals(publications[i])) {
-                found = i;
-            } else {
-                i++;
-            }
-        }
+    private void addPublication(Publication pub) {
+        publications.put(pub.getTitle(), pub);
+    }
 
-        if (found != NOT_FOUND) {
-            System.arraycopy(publications, found + 1, publications, found, publications.length - found - 1);
-            publications[publications.length - 1] = null;
-            publicationsNumber--;
+    public void removePublication(Publication pub) {
+        if (publications.containsValue(pub)) {
+            publications.remove(pub);
         }
     }
 
@@ -63,9 +54,8 @@ public class Library implements Serializable {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < publicationsNumber; i++) {
-            builder.append(publications[i])
-                    .append("\n");
+        for(Publication pub: publications.values()) {
+            builder.append(pub);
         }
         return builder.toString();
     }

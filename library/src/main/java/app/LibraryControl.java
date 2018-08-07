@@ -1,6 +1,7 @@
 package app;
 
 import data.Book;
+import data.LibraryUser;
 import data.Magazine;
 import data.Library;
 import utils.DataReader;
@@ -49,6 +50,12 @@ public class LibraryControl {
                     case PRINT_MAGAZINES:
                         printMagazines();
                         break;
+                    case ADD_USER:
+                        addUser();
+                        break;
+                    case PRINT_USERS:
+                        printUsers();
+                        break;
                     case EXIT:
                         exit();
                 }
@@ -85,6 +92,15 @@ public class LibraryControl {
         LibraryUtils.printMagazines(library);
     }
 
+    private void addUser() {
+        LibraryUser user = dataReader.readAndCreateLibraryUser();
+        library.addUser(user);
+    }
+
+    private void printUsers() {
+        LibraryUtils.printUsers(library);
+    }
+
     private void exit() {
         fileManager.writeLibraryToFile(library);
         System.out.println("Zapisano dane biblioteki do pliku");
@@ -95,7 +111,9 @@ public class LibraryControl {
         ADD_BOOK(1, "Dodanie książki"),
         ADD_MAGAZINE(2, "Dodanie magazynu"),
         PRINT_BOOKS(3, "Wyświetlenie książek"),
-        PRINT_MAGAZINES(4, "Wyświetlenie magazynów");
+        PRINT_MAGAZINES(4, "Wyświetlenie magazynów"),
+        ADD_USER(5, "Dodanie nowego użytkownika"),
+        PRINT_USERS(6, "Wyświetlenie listy użytkowników");
 
         private int value;
         private String description;

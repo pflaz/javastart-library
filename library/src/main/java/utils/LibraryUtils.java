@@ -1,22 +1,19 @@
 package utils;
 
-import data.Book;
-import data.Library;
-import data.Magazine;
-import data.Publication;
+import data.*;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class LibraryUtils {
 
     public static void printBooks(Library library) {
-        Publication[] publications = library.getPublications();
-        Arrays.sort(publications, new Library.AlphabeticalComparator());
-        int publicationsNumber = library.getPublicationsNumber();
+        List<Publication> publications = new ArrayList<>();
+        publications.addAll(library.getPublications().values());
+        Collections.sort(publications,new Library.AlphabeticalComparator());
         int countBooks = 0;
-        for (int i = 0; i < publicationsNumber; i++) {
-            if (publications[i] instanceof Book) {
-                System.out.println(publications[i]);
+        for (Publication p: publications) {
+            if (p instanceof Book) {
+                System.out.println(p);
                 countBooks++;
             }
         }
@@ -26,18 +23,32 @@ public class LibraryUtils {
     }
 
     public static void printMagazines(Library library) {
-        Publication[] publications = library.getPublications();
-        Arrays.sort(publications, new Library.AlphabeticalComparator());
-        int publicationsNumber = library.getPublicationsNumber();
+        List<Publication> publications = new ArrayList<>();
+        publications.addAll(library.getPublications().values());
+        Collections.sort(publications,new Library.AlphabeticalComparator());
         int countMagazines = 0;
-        for (int i = 0; i < publicationsNumber; i++) {
-            if (publications[i] instanceof Magazine) {
-                System.out.println(publications[i]);
+        for (Publication p: publications) {
+            if (p instanceof Magazine) {
+                System.out.println(p);
                 countMagazines++;
             }
         }
         if (countMagazines == 0) {
             System.out.println("Brak magazynów w bibliotece");
+        }
+    }
+
+    public static void printUsers(Library library) {
+        List<LibraryUser> users = new ArrayList<>();
+        users.addAll(library.getUsers().values());
+        Collections.sort(users, new Comparator<LibraryUser>() {
+            @Override
+            public int compare(LibraryUser o1, LibraryUser o2) {
+                return o1.getLastName().compareTo(o2.getLastName());
+            }
+        });
+        for(LibraryUser u: users) {
+            System.out.println(u);
         }
     }
 }
