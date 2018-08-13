@@ -47,7 +47,7 @@ public class Book extends Publication {
                 .append("\nAuthor: ")
                 .append(getAuthor())
                 .append("\nYear: ")
-                .append(getYear())
+                .append(getDate().getYear())
                 .append("\nPages: ")
                 .append(getPages())
                 .append("\nPublisher: ")

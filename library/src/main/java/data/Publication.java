@@ -1,20 +1,21 @@
 package data;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public abstract class Publication implements Serializable, Comparable<Publication> {
     public static final long serialVersionUID = 54354553543534554L;
-    private int year;
+    private LocalDate date;
     private String title;
     private String publisher;
 
-    public int getYear() {
-        return year;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public String getTitle() {
@@ -34,7 +35,7 @@ public abstract class Publication implements Serializable, Comparable<Publicatio
     }
 
     protected Publication(int year, String title, String publisher) {
-        this.year = year;
+        this.date = LocalDate.of(year, 1, 1);
         this.title = title;
         this.publisher = publisher;
     }
@@ -44,7 +45,7 @@ public abstract class Publication implements Serializable, Comparable<Publicatio
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Publication that = (Publication) o;
-        return year == that.year &&
+        return Objects.equals(date, that.date) &&
                 Objects.equals(title, that.title) &&
                 Objects.equals(publisher, that.publisher);
     }
@@ -52,7 +53,7 @@ public abstract class Publication implements Serializable, Comparable<Publicatio
     @Override
     public int hashCode() {
 
-        return Objects.hash(year, title, publisher);
+        return Objects.hash(date, title, publisher);
     }
 
     @Override

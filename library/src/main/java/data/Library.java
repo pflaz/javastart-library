@@ -91,8 +91,8 @@ public class Library implements Serializable {
                 return -1;
             }
 
-            Integer i1 = o1.getYear();
-            Integer i2 = o2.getYear();
+            Integer i1 = o1.getDate().getYear();
+            Integer i2 = o2.getDate().getYear();
             return -i1.compareTo(i2);
         }
     }

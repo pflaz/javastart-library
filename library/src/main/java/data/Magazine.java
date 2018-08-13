@@ -1,5 +1,6 @@
 package data;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Magazine extends Publication {
@@ -8,20 +9,16 @@ public class Magazine extends Publication {
     private int day;
     private String language;
 
-    public int getMonth() {
-        return month;
+    public int getYear() {
+        return getDate().getYear();
     }
 
-    public void setMonth(int month) {
-        this.month = month;
+    public int getMonth() {
+        return getDate().getMonthValue();
     }
 
     public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
+        return getDate().getDayOfMonth();
     }
 
     public String getLanguage() {
@@ -35,8 +32,7 @@ public class Magazine extends Publication {
     public Magazine(String title, String publisher, String language, int year, int month, int day) {
         super(year, title, publisher);
         setLanguage(language);
-        setMonth(month);
-        setDay(day);
+        setDate(LocalDate.of(year, month, day));
     }
 
     @Override
